@@ -1,0 +1,1325 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مرکز تولیدکنندگان محتوا</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* ============ BASE ============ */
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  /* تم رنگی جدید بر اساس عکس */
+  --bg: #faf8f5;
+  --surface: #ffffff;
+  --surface-hover: #fdfbf8;
+  --text: #1a1a1a;
+  --text-muted: #6b6b6b;
+  --border: #e6e1d8;
+  --border-hover: #d1c8be;
+  --accent: #111111;
+  --accent-text: #ffffff;
+  --highlight: #f4d0a5;
+  --highlight-light: #faebd7;
+  --radius: 16px;
+  --radius-sm: 12px;
+  --shadow-sm: 0 2px 8px rgba(0,0,0,.03);
+  --shadow-md: 0 8px 24px rgba(0,0,0,.06);
+  --shadow-lg: 0 16px 40px rgba(0,0,0,.08);
+}
+html,body{height:100%}
+body{
+  font-family:'Vazirmatn',system-ui,-apple-system,sans-serif;
+  background-color:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  padding-bottom:60px;
+}
+::selection{background:var(--highlight);color:var(--text)}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:10px;border:2px solid var(--bg)}
+::-webkit-scrollbar-thumb:hover{background:#c9c0b3}
+
+.wrap{max-width:1220px;margin:0 auto;padding:0 22px}
+
+/* ============ TOPBAR ============ */
+.topbar{
+  position:sticky;top:0;z-index:50;
+  background:rgba(250,248,245,.85);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+}
+.topbar-inner{
+  max-width:1220px;margin:0 auto;padding:16px 22px;
+  display:flex;align-items:center;gap:18px;flex-wrap:wrap;
+}
+.brand{display:flex;align-items:center;gap:13px;margin-inline-end:auto;cursor:pointer;}
+.logo{
+  width:46px;height:46px;border-radius:14px;flex:none;
+  background:var(--accent);color:var(--accent-text);
+  display:grid;place-items:center;font-size:22px;
+}
+.brand h1{font-size:17px;font-weight:800;letter-spacing:-.2px;line-height:1.3}
+.brand p{font-size:12px;color:var(--text-muted);font-weight:400;margin-top:2px}
+.actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+
+/* ============ BUTTONS ============ */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:7px;
+  padding:10px 16px;border-radius:50px; /* دکمه‌های گرد */
+  border:1px solid var(--border);background:var(--surface);color:var(--text);
+  font-family:inherit;font-size:13.5px;font-weight:600;cursor:pointer;
+  transition:all .2s ease;white-space:nowrap;box-shadow:var(--shadow-sm);
+}
+.btn:hover{background:var(--surface-hover);border-color:var(--border-hover);transform:translateY(-1px);box-shadow:var(--shadow-md)}
+.btn:active{transform:translateY(0) scale(.98)}
+.btn-primary{
+  background:var(--accent);color:var(--accent-text);border-color:var(--accent);
+}
+.btn-primary:hover{background:#333;border-color:#333;box-shadow:var(--shadow-md)}
+.btn-ghost{background:transparent;border-color:transparent;box-shadow:none;color:var(--text-muted);padding:8px 10px}
+.btn-ghost:hover{color:var(--text);background:var(--surface);box-shadow:var(--shadow-sm)}
+.btn-danger{background:transparent;border-color:#ffcccc;color:#d32f2f}
+.btn-danger:hover{background:#fff0f0;border-color:#ff9999}
+.btn-sm{padding:8px 14px;font-size:12.5px;border-radius:10px}
+.btn-icon{width:42px;height:42px;padding:0;border-radius:50%}
+.btn svg{width:16px;height:16px;flex:none}
+
+/* ============ TOOLBAR ============ */
+.toolbar{display:flex;gap:12px;align-items:center;margin:32px 0 20px;flex-wrap:wrap}
+.search-wrap{position:relative;flex:1;min-width:240px}
+.search-wrap svg{
+  position:absolute;right:15px;top:50%;transform:translateY(-50%);
+  width:17px;height:17px;color:var(--text-muted);pointer-events:none;
+}
+.search-wrap input{
+  width:100%;padding:13px 44px 13px 16px;
+  background:var(--surface);border:1px solid var(--border);border-radius:50px;
+  color:var(--text);font-family:inherit;font-size:14px;outline:none;
+  transition:all .2s;box-shadow:var(--shadow-sm);
+}
+.search-wrap input::placeholder{color:#a0a0a0}
+.search-wrap input:focus{
+  border-color:var(--accent);box-shadow:0 0 0 3px rgba(17,17,17,.05);
+}
+.sort-select{
+  padding:12px 18px;border-radius:50px;background:var(--surface);
+  border:1px solid var(--border);color:var(--text);font-family:inherit;
+  font-size:12.5px;font-weight:600;cursor:pointer;outline:none;box-shadow:var(--shadow-sm);
+  appearance:none;
+  background-image:url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236b6b6b' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:left 14px center;background-size:14px;
+  padding-left:38px;
+}
+
+/* ============ STATS ============ */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:28px 0 0}
+.stat{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  padding:18px;display:flex;align-items:center;gap:14px;box-shadow:var(--shadow-sm);transition:all .2s;
+}
+.stat:hover{border-color:var(--border-hover);transform:translateY(-2px);box-shadow:var(--shadow-md)}
+.stat-ico{
+  width:42px;height:42px;border-radius:12px;flex:none;display:grid;place-items:center;font-size:18px;
+  background:var(--highlight-light);color:var(--text);
+}
+.stat b{display:block;font-size:20px;font-weight:800;line-height:1.1;letter-spacing:-.5px}
+.stat span{font-size:12px;color:var(--text-muted);font-weight:500;margin-top:4px}
+
+/* ============ GRID + CARD ============ */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:18px}
+.card{
+  position:relative;overflow:hidden;
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  padding:20px;cursor:pointer;box-shadow:var(--shadow-sm);
+  transition:all .25s cubic-bezier(.2,.8,.3,1);
+}
+.card:hover{
+  transform:translateY(-4px);border-color:var(--border-hover);box-shadow:var(--shadow-lg);
+}
+.card-head{display:flex;align-items:center;gap:13px;margin-bottom:14px}
+.avatar{
+  width:50px;height:50px;border-radius:15px;flex:none;
+  display:grid;place-items:center;font-size:20px;font-weight:800;color:#fff;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.2), 0 4px 10px rgba(0,0,0,.1);
+}
+.card-title{min-width:0;flex:1}
+.card-title h3{
+  font-size:15px;font-weight:800;letter-spacing:-.2px;margin-bottom:4px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.platform-badge{
+  display:inline-flex;align-items:center;gap:4px;
+  font-size:12px;font-weight:500;color:var(--text-muted);
+}
+.status-dot{
+  width:10px;height:10px;border-radius:50%;flex:none;
+  background:var(--c);
+}
+.card-bio{
+  font-size:13px;color:var(--text-muted);line-height:1.7;margin-bottom:14px;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:22px;
+}
+.card-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px;min-height:24px}
+.tag{
+  font-size:11px;font-weight:600;padding:5px 10px;border-radius:8px;
+  background:var(--highlight-light);border:1px solid #f0dcc1;color:#8b6b42;white-space:nowrap;
+}
+.tag.more{background:var(--bg);border-color:var(--border);color:var(--text-muted)}
+.card-foot{
+  display:flex;align-items:center;gap:14px;padding-top:14px;
+  border-top:1px solid var(--border);font-size:11.5px;color:var(--text-muted);font-weight:500;
+}
+.card-foot span{display:inline-flex;align-items:center;gap:5px}
+.stars-mini{color:#d4a373;letter-spacing:1px}
+
+/* ============ EMPTY ============ */
+.empty{
+  grid-column:1/-1;text-align:center;padding:70px 24px;
+  border:1.5px dashed var(--border);border-radius:24px;background:var(--surface);box-shadow:var(--shadow-sm);
+}
+.empty-ico{font-size:48px;margin-bottom:16px;opacity:.6}
+.empty h3{font-size:17px;font-weight:800;margin-bottom:8px}
+.empty p{font-size:13px;color:var(--text-muted);margin-bottom:22px;line-height:1.8}
+
+/* ============ DETAIL ============ */
+.detail-top{display:flex;align-items:center;gap:10px;margin:28px 0 18px;flex-wrap:wrap}
+.detail-hero{
+  background:var(--surface);border:1px solid var(--border);border-radius:24px;padding:28px;
+  display:flex;gap:20px;align-items:center;flex-wrap:wrap;box-shadow:var(--shadow-md);
+}
+.avatar-lg{
+  width:86px;height:86px;border-radius:22px;flex:none;
+  display:grid;place-items:center;font-size:34px;font-weight:800;color:#fff;
+  box-shadow:inset 0 2px 0 rgba(255,255,255,.2), 0 8px 20px rgba(0,0,0,.1);
+}
+.detail-hero-info{flex:1;min-width:200px}
+.detail-name{font-size:24px;font-weight:900;letter-spacing:-.6px;line-height:1.25}
+.detail-meta{display:flex;align-items:center;gap:9px;margin-top:8px;flex-wrap:wrap}
+.pill{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:11.5px;font-weight:700;padding:6px 12px;border-radius:50px;
+  background:var(--bg);border:1px solid var(--border);color:var(--text-muted);
+}
+.rating{display:flex;align-items:center;gap:3px;margin-top:10px}
+.rating button{
+  background:none;border:none;font-size:20px;cursor:pointer;color:#e0e0e0;
+  padding:0 2px;line-height:1;transition:transform .15s, color .15s;
+}
+.rating button:hover{transform:scale(1.15)}
+.rating button.on{color:#d4a373}
+
+.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}
+.panel{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  padding:22px;box-shadow:var(--shadow-sm);
+}
+.panel.full{grid-column:1/-1}
+.panel-head{display:flex;align-items:center;gap:10px;margin-bottom:18px}
+.panel-head .ic{
+  width:34px;height:34px;border-radius:10px;flex:none;display:grid;place-items:center;font-size:15px;
+  background:var(--highlight-light);color:var(--text);
+}
+.panel-head h3{font-size:15px;font-weight:800;letter-spacing:-.2px}
+.panel-head .count{
+  margin-inline-start:auto;font-size:11.5px;font-weight:700;color:var(--text-muted);
+  background:var(--bg);padding:4px 10px;border-radius:50px;border:1px solid var(--border);
+}
+
+/* tags */
+.tag-cloud{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.tag-lg{
+  display:inline-flex;align-items:center;gap:7px;
+  font-size:12.5px;font-weight:700;padding:7px 12px;border-radius:12px;
+  background:var(--highlight-light);border:1px solid #f0dcc1;color:#8b6b42;
+  transition:all .2s;
+}
+.tag-lg:hover{border-color:#e0c6a6;transform:translateY(-1px)}
+.tag-lg .x{
+  width:17px;height:17px;border-radius:50%;display:grid;place-items:center;
+  background:rgba(139,107,66,.1);font-size:11px;cursor:pointer;color:#8b6b42;
+  transition:all .15s;font-weight:700;
+}
+.tag-lg .x:hover{background:#8b6b42;color:#fff}
+
+/* hashtag picker (کلیکی) */
+.hint{font-size:12px;color:var(--text-muted);margin-bottom:14px;line-height:1.7}
+.tag-picker{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+.pick{display:flex;align-items:center;gap:8px;padding:8px 10px;border:1px solid var(--border);border-radius:12px;background:var(--bg);transition:all .2s}
+.pick.on{background:var(--highlight-light);border-color:#f0dcc1}
+.pick-name{flex:1;min-width:0;text-align:right;background:none;border:none;font-family:inherit;font-size:12.5px;font-weight:700;color:var(--text-muted);cursor:pointer;padding:2px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;direction:ltr}
+.pick.on .pick-name{color:#8b6b42}
+.pick-name:hover{color:var(--text)}
+.pick-day{flex:none;width:104px;padding:6px 8px;border:1px solid var(--border);border-radius:8px;background:var(--surface);font-family:inherit;font-size:11.5px;font-weight:600;color:var(--text);cursor:pointer;outline:none}
+.pick-day:focus{border-color:var(--accent)}
+
+/* hashtag overview page */
+.ht-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.ht-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow-sm);transition:all .2s}
+.ht-card:hover{border-color:var(--border-hover);box-shadow:var(--shadow-md);transform:translateY(-2px)}
+.ht-card.empty{opacity:.65}
+.ht-card-head{display:flex;align-items:center;gap:10px;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--border)}
+.ht-name{font-size:14px;font-weight:800;color:var(--text);direction:ltr}
+.ht-count{margin-inline-start:auto;font-size:11px;font-weight:700;color:var(--text-muted);background:var(--bg);padding:4px 10px;border-radius:50px;border:1px solid var(--border);white-space:nowrap}
+.ht-people{display:flex;flex-wrap:wrap;gap:8px}
+.ht-person{display:inline-flex;align-items:center;font-family:inherit;font-size:12.5px;font-weight:700;color:var(--text);background:var(--highlight-light);border:1px solid #f0dcc1;border-radius:10px;padding:6px 10px;cursor:pointer;transition:all .15s}
+.ht-person:hover{border-color:#e0c6a6;transform:translateY(-1px)}
+.ht-person b{color:#8b6b42;font-weight:800}
+.ht-none{font-size:12px;color:#a0a0a0;font-weight:500}
+
+.inline-form{display:flex;gap:9px}
+.inline-form input, .inline-form textarea, .field{
+  flex:1;width:100%;padding:12px 15px;
+  background:var(--bg);border:1px solid var(--border);border-radius:12px;
+  color:var(--text);font-family:inherit;font-size:13px;outline:none;transition:all .2s;
+}
+.inline-form input::placeholder, textarea::placeholder{color:#a0a0a0}
+.inline-form input:focus, textarea:focus, .field:focus{
+  border-color:var(--accent);background:var(--surface);
+  box-shadow:0 0 0 3px rgba(17,17,17,.05);
+}
+textarea{resize:vertical;min-height:76px;line-height:1.8}
+
+/* info grid */
+.info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px}
+.info-item label{
+  display:block;font-size:11.5px;font-weight:700;color:var(--text-muted);margin-bottom:7px;
+}
+.info-item.wide{grid-column:1/-1}
+select.field{cursor:pointer;appearance:none;
+  background-image:url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236b6b6b' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:left 14px center;background-size:14px;padding-left:38px;
+}
+
+/* lists (notes/ideas/links) */
+.list{display:flex;flex-direction:column;gap:9px;margin-top:14px}
+.list-item{
+  display:flex;gap:11px;align-items:flex-start;padding:13px 15px;border-radius:12px;
+  background:var(--bg);border:1px solid var(--border);transition:all .2s;
+}
+.list-item:hover{background:var(--surface);border-color:var(--border-hover);box-shadow:var(--shadow-sm)}
+.list-item .dot{
+  width:6px;height:6px;border-radius:50%;flex:none;margin-top:8px;background:var(--accent);
+}
+.list-item .body{flex:1;min-width:0}
+.list-item .text{font-size:13px;line-height:1.8;word-break:break-word;white-space:pre-wrap;color:var(--text)}
+.list-item .time{font-size:10.5px;color:#a0a0a0;margin-top:5px;font-weight:500}
+.list-item a{color:var(--text);text-decoration:none;font-size:13px;font-weight:700;word-break:break-all;border-bottom:1px solid var(--text-muted)}
+.list-item a:hover{color:var(--text-muted)}
+.list-item .del{
+  background:none;border:none;color:#a0a0a0;cursor:pointer;font-size:18px;
+  padding:0 4px;line-height:1;border-radius:6px;transition:all .15s;flex:none;
+}
+.list-item .del:hover{color:#d32f2f;background:#fff0f0}
+.empty-mini{font-size:12.5px;color:#a0a0a0;text-align:center;padding:16px 0;font-weight:500}
+
+/* ============ MODAL ============ */
+.modal-backdrop{
+  position:fixed;inset:0;z-index:200;
+  background:rgba(250,248,245,.8);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  display:grid;place-items:center;padding:20px;animation:fadeIn .2s ease;
+}
+.modal{
+  width:100%;max-width:470px;max-height:88vh;overflow-y:auto;
+  background:var(--surface);border:1px solid var(--border);border-radius:24px;
+  padding:28px;box-shadow:var(--shadow-lg);animation:popIn .3s cubic-bezier(.2,.9,.3,1.05);
+}
+.modal h2{font-size:18px;font-weight:800;margin-bottom:20px;letter-spacing:-.3px}
+.modal label{display:block;font-size:12.5px;font-weight:700;color:var(--text-muted);margin:14px 0 7px}
+.modal label:first-of-type{margin-top:0}
+.modal input,.modal select,.modal textarea{width:100%}
+.modal-actions{display:flex;gap:10px;margin-top:24px}
+.modal-actions .btn{flex:1}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes popIn{from{opacity:0;transform:scale(.96) translateY(10px)}to{opacity:1;transform:none}}
+
+/* ============ TOAST ============ */
+#toast-root{position:fixed;bottom:26px;left:50%;transform:translateX(-50%);z-index:300;display:flex;flex-direction:column;gap:9px;align-items:center;pointer-events:none}
+.toast{
+  padding:12px 22px;border-radius:50px;font-size:13px;font-weight:700;
+  background:var(--accent);color:var(--accent-text);
+  box-shadow:var(--shadow-lg);animation:toastIn .3s cubic-bezier(.2,.9,.3,1.1);
+  display:flex;align-items:center;gap:8px;
+}
+.toast.err{background:#d32f2f}
+@keyframes toastIn{from{opacity:0;transform:translateY(18px) scale(.94)}to{opacity:1;transform:none}}
+.toast.out{animation:toastOut .25s forwards}
+@keyframes toastOut{to{opacity:0;transform:translateY(-8px) scale(.96)}}
+
+/* ============ ANIM ============ */
+.fade-in{animation:viewIn .35s cubic-bezier(.2,.8,.3,1)}
+@keyframes viewIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.card{animation:cardIn .38s cubic-bezier(.2,.8,.3,1) backwards}
+@keyframes cardIn{from{opacity:0;transform:translateY(16px) scale(.97)}to{opacity:1;transform:none}}
+
+/* ============ RESPONSIVE ============ */
+@media(max-width:860px){
+  .detail-grid{grid-template-columns:1fr}
+  .brand p{display:none}
+}
+@media(max-width:620px){
+  .wrap{padding:0 15px}
+  .topbar-inner{padding:12px 15px;gap:10px}
+  .brand h1{font-size:14.5px}
+  .logo{width:40px;height:40px;border-radius:13px;font-size:19px}
+  .actions .btn span{display:none}
+  .actions .btn{padding:10px 12px}
+  .grid{grid-template-columns:1fr}
+  .detail-hero{padding:20px;border-radius:22px;text-align:center;justify-content:center}
+  .detail-name{font-size:20px}
+  .detail-meta{justify-content:center}
+  .rating{justify-content:center}
+  .avatar-lg{width:70px;height:70px;border-radius:18px;font-size:28px}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .stat{padding:12px 13px}
+  .stat b{font-size:16px}
+  .modal{padding:20px;border-radius:20px}
+  .inline-form{flex-direction:column}
+  .inline-form .btn{width:100%}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand" data-action="home">
+      <div class="logo">✦</div>
+      <div>
+        <h1>مرکز تولیدکنندگان محتوا</h1>
+        <p>مدیریت، هشتگ‌ها، ایده‌ها و یادداشت‌ها</p>
+      </div>
+    </div>
+    <div class="actions">
+      <button class="btn" data-action="hashtags-view" title="نمای هشتگ‌ها و روزها">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="9" x2="20" y2="9"/><line x1="4" y1="15" x2="20" y2="15"/><line x1="10" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="14" y2="21"/></svg>
+        <span>نمای هشتگ‌ها</span>
+      </button>
+      <button class="btn" data-action="export" title="دانلود پشتیبان">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span>پشتیبان</span>
+      </button>
+      <button class="btn" data-action="import" title="بازیابی از فایل">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        <span>بازیابی</span>
+      </button>
+      <button class="btn btn-primary" data-action="new">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        <span>تولیدکننده جدید</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap" id="main"></main>
+
+<div id="modal-root"></div>
+<div id="toast-root"></div>
+<input type="file" id="file-input" accept="application/json" style="display:none">
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script>
+/* =========================================================
+   CONSTANTS
+   ========================================================= */
+const SUPABASE_URL = 'https://dgikbrvrtxddwhngkfpp.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_hdGwQYIj-7w972Q5i4pUeg_gajAg2LM';
+const SB_TABLE = 'creators';
+const sb = window.supabase
+  ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { persistSession: false, autoRefreshToken: false } })
+  : null;
+
+const STATUSES = [
+  { id:'active',   label:'فعال',           color:'#111111' },
+  { id:'collab',   label:'در حال همکاری',  color:'#8b6b42' },
+  { id:'lead',     label:'پیشنهاد / سرنخ', color:'#d4a373' },
+  { id:'archived', label:'آرشیو',          color:'#a0a0a0' },
+];
+
+/* لیست ثابت هشتگ‌ها — فقط از همین‌ها انتخاب می‌شود */
+const HASHTAGS = [
+  'byte_security','byte_algo','byte_news','byte_history','byte_meme',
+  'byte_quote','byte_project','byte_roadmap','byte_glossary','byte_paper',
+  'byte_book','byte_challenge','byte_bug','byte_event','byte_python',
+  'byte_scratch','byte_web','byte_community','byte_research','byte_fact',
+  'byte_trivia','byte_voice','byte_pod','byte_video','byte_clip',
+  'byte_tip','byte_poll','byte_tool','byte_webinar','byte_cheatsheet',
+];
+
+const DAYS = ['شنبه','یکشنبه','دوشنبه','سه‌شنبه','چهارشنبه','پنجشنبه','جمعه'];
+
+/* =========================================================
+   STATE
+   ========================================================= */
+let state = {
+  creators: [],
+  view: 'list',
+  currentId: null,
+  search: '',
+  sort: 'newest',
+};
+
+/* =========================================================
+   STORAGE & DEMO DATA
+   ========================================================= */
+async function persist(creator){
+  if (!sb) { toast('سوپابیس در دسترس نیست', 'err'); return; }
+  const list = creator ? [creator] : state.creators;
+  const rows = list.map(c => ({ id:c.id, data:c, updated_at:new Date(c.updatedAt || Date.now()).toISOString() }));
+  if (!rows.length) return;
+  const { error } = await sb.from(SB_TABLE).upsert(rows);
+  if (error) { console.error(error); toast('خطا در ذخیره‌سازی ابری', 'err'); }
+}
+
+async function removeCreator(id){
+  if (!sb) { toast('سوپابیس در دسترس نیست', 'err'); return; }
+  const { error } = await sb.from(SB_TABLE).delete().eq('id', id);
+  if (error) { console.error(error); toast('خطا در حذف ابری', 'err'); }
+}
+
+async function loadStore(){
+  if (!sb) { toast('کتابخانهٔ سوپابیس بارگذاری نشد', 'err'); state.creators = []; return; }
+  try {
+    const { data, error } = await sb.from(SB_TABLE).select('data');
+    if (error) throw error;
+    if (data && data.length) { state.creators = data.map(r => r.data).filter(Boolean); return; }
+  } catch(e){ console.warn(e); toast('اتصال به سوپابیس برقرار نشد', 'err'); state.creators = []; return; }
+
+  const now = Date.now();
+  state.creators = [
+    {
+      id: uid(), name:'کوروش رضایی', status:'active',
+      niche:'ابزار و امنیت', email:'kourosh@example.com', phone:'',
+      bio:'معرفی ابزارهای برنامه‌نویسی، امنیت و آموزش پایتون.',
+      rating: 5,
+      hashtags:['byte_tool','byte_security','byte_python'],
+      days:{ byte_tool:'شنبه', byte_security:'شنبه', byte_python:'چهارشنبه' },
+      notes:[{ id:uid(), text:'برای معرفی ابزار جدید هفتهٔ شنبه هماهنگ شد.', time: now-86400000 }],
+      ideas:[{ id:uid(), text:'ویدیوی معرفی ۵ ابزار کاربردی VS Code', time: now-3600000 }],
+      links:[{ id:uid(), title:'کانال یوتیوب', url:'https://youtube.com' }],
+      createdAt: now, updatedAt: now
+    },
+    {
+      id: uid(), name:'صدرا کریمی', status:'collab',
+      niche:'وب و خبر', email:'sadra@example.com', phone:'',
+      bio:'اخبار تکنولوژی، توسعهٔ وب و معرفی پروژه‌های اوپن‌سورس.',
+      rating: 4,
+      hashtags:['byte_tool','byte_web','byte_news'],
+      days:{ byte_tool:'دوشنبه', byte_web:'دوشنبه', byte_news:'دوشنبه' },
+      notes:[], ideas:[], links:[], createdAt: now - 100000, updatedAt: now - 100000
+    },
+    {
+      id: uid(), name:'نیلوفر احمدی', status:'active',
+      niche:'سرگرمی و ویدیو', email:'niloufar@example.com', phone:'',
+      bio:'محتوای سرگرم‌کننده، میم و ویدیوهای کوتاه.',
+      rating: 5,
+      hashtags:['byte_meme','byte_quote','byte_video'],
+      days:{ byte_meme:'جمعه', byte_quote:'جمعه', byte_video:'پنجشنبه' },
+      notes:[], ideas:[], links:[], createdAt: now - 200000, updatedAt: now - 200000
+    }
+  ];
+  await persist();
+}
+
+/* =========================================================
+   UTILS
+   ========================================================= */
+function uid(){ return Date.now().toString(36) + Math.random().toString(36).slice(2,7); }
+
+function esc(s){
+  return String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+function getCreator(id){ return state.creators.find(c => c.id === id); }
+
+function statusOf(id){ return STATUSES.find(s => s.id === id) || STATUSES[0]; }
+
+function avatarGradient(name){
+  const colors = ['#111111', '#333333', '#4a4a4a', '#8b6b42', '#d4a373'];
+  let h = 0;
+  const s = String(name || '?');
+  for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) % colors.length;
+  return colors[h];
+}
+
+function initial(name){
+  const t = String(name || '').trim();
+  return t ? t[0] : '؟';
+}
+
+function timeAgo(ts){
+  if (!ts) return '';
+  const d = Date.now() - ts;
+  const m = Math.floor(d / 60000);
+  if (m < 1) return 'همین حالا';
+  if (m < 60) return `${m} دقیقه پیش`;
+  const h = Math.floor(m / 60);
+  if (h < 24) return `${h} ساعت پیش`;
+  const days = Math.floor(h / 24);
+  if (days < 30) return `${days} روز پیش`;
+  try {
+    return new Date(ts).toLocaleDateString('fa-IR', { year:'numeric', month:'long', day:'numeric' });
+  } catch(e){ return ''; }
+}
+
+function normalizeUrl(u){
+  if (!u) return '';
+  return /^https?:\/\//i.test(u) ? u : 'https://' + u;
+}
+
+function totalTags(){
+  return state.creators.reduce((n, c) => n + (c.hashtags?.length || 0), 0);
+}
+
+/* =========================================================
+   RENDER — LIST
+   ========================================================= */
+function filteredCreators(){
+  let list = [...state.creators];
+
+  const q = state.search.trim().toLowerCase();
+  if (q) {
+    list = list.filter(c => {
+      const hay = [c.name, c.niche, c.bio, c.email, ...(c.hashtags || []), ...(c.notes || []).map(n => n.text), ...(c.ideas || []).map(n => n.text)].join(' ').toLowerCase();
+      return hay.includes(q);
+    });
+  }
+
+  switch (state.sort) {
+    case 'oldest': list.sort((a,b) => (a.createdAt||0) - (b.createdAt||0)); break;
+    case 'name':   list.sort((a,b) => String(a.name).localeCompare(String(b.name), 'fa')); break;
+    case 'rating': list.sort((a,b) => (b.rating||0) - (a.rating||0)); break;
+    case 'tags':   list.sort((a,b) => (b.hashtags?.length||0) - (a.hashtags?.length||0)); break;
+    default:       list.sort((a,b) => (b.updatedAt||b.createdAt||0) - (a.updatedAt||a.createdAt||0));
+  }
+  return list;
+}
+
+function cardHTML(c, i){
+  const s = statusOf(c.status);
+  const tags = (c.hashtags || []).slice(0, 3);
+  const more = (c.hashtags || []).length - tags.length;
+  const stars = '★'.repeat(c.rating || 0) + '☆'.repeat(5 - (c.rating || 0));
+
+  return `
+  <article class="card" data-action="open" data-id="${c.id}" style="animation-delay:${Math.min(i*35,300)}ms">
+    <div class="card-head">
+      <div class="avatar" style="background:${avatarGradient(c.name)}">${esc(initial(c.name))}</div>
+      <div class="card-title">
+        <h3>${esc(c.name) || 'بدون نام'}</h3>
+        <span class="platform-badge">${c.niche ? esc(c.niche) : 'بدون حوزه تعریف‌شده'}</span>
+      </div>
+      <span class="status-dot" style="--c:${s.color}" title="${esc(s.label)}"></span>
+    </div>
+    <p class="card-bio">${esc(c.bio) || '<span style="opacity:.5">توضیحی ثبت نشده…</span>'}</p>
+    <div class="card-tags">
+      ${tags.map(t => `<span class="tag">#${esc(t)}</span>`).join('')}
+      ${more > 0 ? `<span class="tag more">+${more}</span>` : ''}
+    </div>
+    <div class="card-foot">
+      <span class="stars-mini">${stars}</span>
+      <span># ${(c.hashtags||[]).length} هشتگ</span>
+      <span>📝 ${(c.notes||[]).length + (c.ideas||[]).length}</span>
+    </div>
+  </article>`;
+}
+
+function gridHTML(){
+  const list = filteredCreators();
+  if (!list.length) {
+    const hasAny = state.creators.length > 0;
+    return `
+    <div class="empty">
+      <div class="empty-ico">${hasAny ? '🔍' : '✦'}</div>
+      <h3>${hasAny ? 'چیزی پیدا نشد' : 'هنوز کسی اضافه نشده'}</h3>
+      <p>${hasAny
+        ? 'عبارت جستجو را تغییر بده.'
+        : 'اولین تولیدکننده محتوا را اضافه کن و هشتگ‌ها، یادداشت‌ها و ایده‌هایش را ثبت کن.'}</p>
+      ${hasAny
+        ? '<button class="btn" data-action="clear-filters">پاک کردن فیلترها</button>'
+        : '<button class="btn btn-primary" data-action="new">+ افزودن اولین تولیدکننده</button>'}
+    </div>`;
+  }
+  return list.map(cardHTML).join('');
+}
+
+function renderList(){
+  return `
+  <div class="stats fade-in">
+    <div class="stat">
+      <div class="stat-ico">👥</div>
+      <div><b>${state.creators.length}</b><span>تولیدکننده محتوا</span></div>
+    </div>
+    <div class="stat">
+      <div class="stat-ico">#</div>
+      <div><b>${totalTags()}</b><span>هشتگ ثبت‌شده</span></div>
+    </div>
+    <div class="stat">
+      <div class="stat-ico">📝</div>
+      <div><b>${state.creators.reduce((n,c)=>n+(c.notes?.length||0),0)}</b><span>یادداشت</span></div>
+    </div>
+    <div class="stat">
+      <div class="stat-ico">💡</div>
+      <div><b>${state.creators.reduce((n,c)=>n+(c.ideas?.length||0),0)}</b><span>ایده</span></div>
+    </div>
+  </div>
+
+  <div class="toolbar fade-in">
+    <div class="search-wrap">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input id="search" type="text" placeholder="جستجو در نام، هشتگ، حوزه، یادداشت…" value="${esc(state.search)}" autocomplete="off">
+    </div>
+    <select class="sort-select" id="sort">
+      <option value="newest" ${state.sort==='newest'?'selected':''}>جدیدترین</option>
+      <option value="oldest" ${state.sort==='oldest'?'selected':''}>قدیمی‌ترین</option>
+      <option value="name"   ${state.sort==='name'?'selected':''}>الفبا</option>
+      <option value="rating" ${state.sort==='rating'?'selected':''}>بیشترین امتیاز</option>
+      <option value="tags"   ${state.sort==='tags'?'selected':''}>بیشترین هشتگ</option>
+    </select>
+  </div>
+
+  <div class="grid fade-in" id="grid-wrap">${gridHTML()}</div>
+  `;
+}
+
+/* =========================================================
+   RENDER — DETAIL
+   ========================================================= */
+function hashtagPanelHTML(c){
+  const tags = c.hashtags || [];
+  const days = c.days || {};
+  const allTags = [...HASHTAGS, ...tags.filter(t => !HASHTAGS.includes(t))];
+  return `
+    <section class="panel full" id="ht-panel">
+      <div class="panel-head">
+        <div class="ic">#</div>
+        <h3>هشتگ‌ها و روز انتشار</h3>
+        <span class="count">${tags.length}</span>
+      </div>
+      <p class="hint">روی هر هشتگ بزن تا انتخاب شود؛ بعد روز انتشار همان هشتگ را برای این فرد انتخاب کن.</p>
+      <div class="tag-picker">
+        ${allTags.map(t => {
+          const on = tags.includes(t);
+          const day = days[t] || '';
+          return `
+          <div class="pick ${on ? 'on' : ''}">
+            <button type="button" class="pick-name" data-action="toggle-tag" data-id="${c.id}" data-tag="${esc(t)}" title="${on ? 'حذف هشتگ' : 'افزودن هشتگ'}">#${esc(t)}</button>
+            ${on ? `
+            <select class="pick-day" data-action="set-day" data-id="${c.id}" data-tag="${esc(t)}" title="روز انتشار">
+              <option value="" ${!day ? 'selected' : ''}>— روز —</option>
+              ${DAYS.map(d => `<option value="${d}" ${d===day ? 'selected' : ''}>${d}</option>`).join('')}
+            </select>` : ''}
+          </div>`;
+        }).join('')}
+      </div>
+      ${tags.length ? `<div style="margin-top:16px"><button type="button" class="btn btn-sm" data-action="copy-tags" data-id="${c.id}">کپی هشتگ‌ها</button></div>` : ''}
+    </section>`;
+}
+
+function renderDetail(){
+  const c = getCreator(state.currentId);
+  if (!c) { state.view = 'list'; return renderList(); }
+
+  const s = statusOf(c.status);
+  const notes = [...(c.notes||[])].sort((a,b)=>b.time-a.time);
+  const ideas = [...(c.ideas||[])].sort((a,b)=>b.time-a.time);
+  const links = c.links || [];
+
+  return `
+  <div class="detail-top fade-in">
+    <button class="btn" data-action="back">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      بازگشت به فهرست
+    </button>
+    <div style="margin-inline-start:auto;display:flex;gap:10px">
+      <button class="btn btn-danger" data-action="delete" data-id="${c.id}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+        حذف
+      </button>
+    </div>
+  </div>
+
+  <div class="detail-hero fade-in">
+    <div class="avatar-lg" style="background:${avatarGradient(c.name)}">${esc(initial(c.name))}</div>
+    <div class="detail-hero-info">
+      <div class="detail-name">${esc(c.name) || 'بدون نام'}</div>
+      <div class="detail-meta">
+        <span class="pill" style="background:${s.color}15;border-color:${s.color}40;color:${s.color}">
+          <span class="status-dot" style="--c:${s.color}"></span> ${esc(s.label)}
+        </span>
+        ${c.niche ? `<span class="pill">🎯 ${esc(c.niche)}</span>` : ''}
+      </div>
+      <div class="rating" data-id="${c.id}">
+        ${[1,2,3,4,5].map(n => `
+          <button data-action="rate" data-id="${c.id}" data-value="${n}" class="${(c.rating||0) >= n ? 'on' : ''}" title="${n} ستاره">★</button>
+        `).join('')}
+      </div>
+    </div>
+  </div>
+
+  <div class="detail-grid fade-in">
+
+    <!-- HASHTAGS -->
+    ${hashtagPanelHTML(c)}
+
+    <!-- INFO -->
+    <section class="panel full">
+      <div class="panel-head">
+        <div class="ic">👤</div>
+        <h3>اطلاعات پایه</h3>
+      </div>
+      <div class="info-grid">
+        <div class="info-item">
+          <label>نام</label>
+          <input class="field" data-field="name" data-id="${c.id}" value="${esc(c.name)}" placeholder="نام تولیدکننده">
+        </div>
+        <div class="info-item">
+          <label>وضعیت</label>
+          <select class="field" data-field="status" data-id="${c.id}">
+            ${STATUSES.map(x => `<option value="${x.id}" ${x.id===c.status?'selected':''}>${esc(x.label)}</option>`).join('')}
+          </select>
+        </div>
+        <div class="info-item">
+          <label>حوزه فعالیت</label>
+          <input class="field" data-field="niche" data-id="${c.id}" value="${esc(c.niche)}" placeholder="مثلاً گیم، آشپزی…">
+        </div>
+        <div class="info-item">
+          <label>ایمیل</label>
+          <input class="field" data-field="email" data-id="${c.id}" value="${esc(c.email)}" placeholder="name@mail.com" dir="ltr" style="text-align:left">
+        </div>
+        <div class="info-item">
+          <label>شماره تماس</label>
+          <input class="field" data-field="phone" data-id="${c.id}" value="${esc(c.phone)}" placeholder="۰۹۱۲…" dir="ltr" style="text-align:left">
+        </div>
+        <div class="info-item wide">
+          <label>بیوگرافی / توضیحات</label>
+          <textarea class="field" data-field="bio" data-id="${c.id}" placeholder="درباره این تولیدکننده بنویس…">${esc(c.bio)}</textarea>
+        </div>
+      </div>
+    </section>
+
+    <!-- NOTES -->
+    <section class="panel">
+      <div class="panel-head">
+        <div class="ic">📝</div>
+        <h3>یادداشت‌ها</h3>
+        <span class="count">${notes.length}</span>
+      </div>
+      <form class="inline-form" data-form="add-note" data-id="${c.id}">
+        <input name="text" placeholder="یادداشت جدید…" autocomplete="off">
+        <button type="submit" class="btn btn-primary">+</button>
+      </form>
+      <div class="list">
+        ${notes.length
+          ? notes.map(n => `
+            <div class="list-item">
+              <span class="dot"></span>
+              <div class="body">
+                <div class="text">${esc(n.text)}</div>
+                <div class="time">${timeAgo(n.time)}</div>
+              </div>
+              <button class="del" data-action="del-note" data-id="${c.id}" data-nid="${n.id}" title="حذف">×</button>
+            </div>`).join('')
+          : '<div class="empty-mini">یادداشتی ثبت نشده</div>'}
+      </div>
+    </section>
+
+    <!-- IDEAS -->
+    <section class="panel">
+      <div class="panel-head">
+        <div class="ic">💡</div>
+        <h3>ایده‌ها</h3>
+        <span class="count">${ideas.length}</span>
+      </div>
+      <form class="inline-form" data-form="add-idea" data-id="${c.id}">
+        <input name="text" placeholder="ایده جدید…" autocomplete="off">
+        <button type="submit" class="btn btn-primary">+</button>
+      </form>
+      <div class="list">
+        ${ideas.length
+          ? ideas.map(n => `
+            <div class="list-item">
+              <span class="dot" style="background:#d4a373;"></span>
+              <div class="body">
+                <div class="text">${esc(n.text)}</div>
+                <div class="time">${timeAgo(n.time)}</div>
+              </div>
+              <button class="del" data-action="del-idea" data-id="${c.id}" data-nid="${n.id}" title="حذف">×</button>
+            </div>`).join('')
+          : '<div class="empty-mini">ایده‌ای ثبت نشده</div>'}
+      </div>
+    </section>
+
+    <!-- LINKS -->
+    <section class="panel full">
+      <div class="panel-head">
+        <div class="ic">🔗</div>
+        <h3>لینک‌ها</h3>
+        <span class="count">${links.length}</span>
+      </div>
+      <form class="inline-form" data-form="add-link" data-id="${c.id}">
+        <input name="title" placeholder="عنوان" style="flex:0 0 140px" autocomplete="off">
+        <input name="url" placeholder="آدرس لینک…" dir="ltr" style="text-align:left" autocomplete="off">
+        <button type="submit" class="btn btn-primary">+</button>
+      </form>
+      <div class="list">
+        ${links.length
+          ? links.map(l => `
+            <div class="list-item">
+              <span class="dot" style="background:#111;"></span>
+              <div class="body">
+                <a href="${esc(normalizeUrl(l.url))}" target="_blank" rel="noopener">${esc(l.title || l.url)}</a>
+              </div>
+              <button class="del" data-action="del-link" data-id="${c.id}" data-nid="${l.id}" title="حذف">×</button>
+            </div>`).join('')
+          : '<div class="empty-mini">لینکی ثبت نشده</div>'}
+      </div>
+    </section>
+
+  </div>
+  `;
+}
+
+/* =========================================================
+   RENDER — HASHTAG OVERVIEW
+   ========================================================= */
+function renderHashtags(){
+  const dayIndex = d => { const i = DAYS.indexOf(d); return i < 0 ? 99 : i; };
+  const rows = HASHTAGS.map(tag => {
+    const people = state.creators
+      .filter(c => (c.hashtags || []).includes(tag))
+      .map(c => ({ id:c.id, name:c.name || 'بدون نام', day:(c.days && c.days[tag]) || '' }))
+      .sort((a,b) => dayIndex(a.day) - dayIndex(b.day) || String(a.name).localeCompare(String(b.name), 'fa'));
+    return { tag, people };
+  });
+  const covered = rows.filter(r => r.people.length).length;
+
+  return `
+  <div class="detail-top fade-in">
+    <button class="btn" data-action="home">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      بازگشت به فهرست
+    </button>
+    <span class="pill" style="margin-inline-start:auto">پوشش: ${covered} از ${HASHTAGS.length} هشتگ</span>
+  </div>
+
+  <div class="ht-grid fade-in">
+    ${rows.map(r => `
+      <article class="ht-card ${r.people.length ? '' : 'empty'}">
+        <div class="ht-card-head">
+          <span class="ht-name">#${esc(r.tag)}</span>
+          <span class="ht-count">${r.people.length ? r.people.length + ' نفر' : '—'}</span>
+        </div>
+        <div class="ht-people">
+          ${r.people.length
+            ? r.people.map(p => `<button class="ht-person" data-action="open" data-id="${p.id}" title="باز کردن پروفایل">${esc(p.name)}<b>/${esc(p.day || '—')}</b></button>`).join('')
+            : '<span class="ht-none">بدون مسئول</span>'}
+        </div>
+      </article>`).join('')}
+  </div>`;
+}
+
+/* =========================================================
+   MAIN RENDER
+   ========================================================= */
+function render(){
+  const main = document.getElementById('main');
+  main.innerHTML =
+    state.view === 'detail'   ? renderDetail()   :
+    state.view === 'hashtags' ? renderHashtags() :
+    renderList();
+  main.classList.remove('fade-in');
+  void main.offsetWidth;
+  main.classList.add('fade-in');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function refreshGrid(){
+  const g = document.getElementById('grid-wrap');
+  if (!g) return render();
+  g.innerHTML = gridHTML();
+}
+
+/* =========================================================
+   MODAL
+   ========================================================= */
+function openModal(html){
+  document.getElementById('modal-root').innerHTML = `
+    <div class="modal-backdrop">
+      <div class="modal">${html}</div>
+    </div>`;
+}
+function closeModal(){
+  document.getElementById('modal-root').innerHTML = '';
+}
+
+function openNewModal(){
+  openModal(`
+    <h2>تولیدکننده جدید</h2>
+    <form id="new-form">
+      <label>نام <span style="color:#d32f2f">*</span></label>
+      <input class="field" name="name" required placeholder="مثلاً علی رضایی" autocomplete="off" autofocus>
+
+      <label>حوزه فعالیت</label>
+      <input class="field" name="niche" placeholder="مثلاً تکنولوژی، آشپزی، سفر…" autocomplete="off">
+
+      <p class="hint" style="margin-top:14px">هشتگ‌ها و روز انتشار را بعد از ساخت، داخل پروفایل از لیست انتخاب کن.</p>
+
+      <div class="modal-actions">
+        <button type="button" class="btn" data-action="close-modal">انصراف</button>
+        <button type="submit" class="btn btn-primary">ساخت پروفایل</button>
+      </div>
+    </form>
+  `);
+}
+
+function openConfirm(title, text, onYes){
+  openModal(`
+    <h2>${esc(title)}</h2>
+    <p style="font-size:13.5px;color:var(--text-muted);line-height:1.9">${esc(text)}</p>
+    <div class="modal-actions">
+      <button class="btn" data-action="close-modal">انصراف</button>
+      <button class="btn btn-danger" id="confirm-yes" style="background:#d32f2f;color:#fff;border:none">بله، حذف کن</button>
+    </div>
+  `);
+  document.getElementById('confirm-yes').onclick = () => { closeModal(); onYes(); };
+}
+
+/* =========================================================
+   TOAST
+   ========================================================= */
+function toast(msg, type = 'ok'){
+  const root = document.getElementById('toast-root');
+  const el = document.createElement('div');
+  el.className = 'toast ' + type;
+  el.innerHTML = `<span>${type === 'ok' ? '✓' : '!'}</span> ${esc(msg)}`;
+  root.appendChild(el);
+  setTimeout(() => {
+    el.classList.add('out');
+    setTimeout(() => el.remove(), 260);
+  }, 2400);
+}
+
+/* =========================================================
+   ACTIONS
+   ========================================================= */
+function createCreator(data){
+  const now = Date.now();
+  const c = {
+    id: uid(),
+    name: (data.name || '').trim(),
+    status: 'active',
+    niche: (data.niche || '').trim(),
+    email: '',
+    phone: '',
+    bio: '',
+    rating: 0,
+    hashtags: [],
+    days: {},
+    notes: [],
+    ideas: [],
+    links: [],
+    createdAt: now,
+    updatedAt: now,
+  };
+  state.creators.unshift(c);
+  persist(c);
+  return c;
+}
+
+function deleteCreator(id){
+  state.creators = state.creators.filter(c => c.id !== id);
+  removeCreator(id);
+  state.view = 'list';
+  state.currentId = null;
+  render();
+  toast('پروفایل حذف شد');
+}
+
+/* =========================================================
+   EVENT DELEGATION
+   ========================================================= */
+document.addEventListener('click', (e) => {
+
+  if (e.target.classList && e.target.classList.contains('modal-backdrop')) {
+    closeModal();
+    return;
+  }
+
+  const el = e.target.closest('[data-action]');
+  if (!el) return;
+
+  const action = el.dataset.action;
+  const id = el.dataset.id;
+
+  switch (action) {
+    case 'new':
+      openNewModal();
+      break;
+    case 'hashtags-view':
+      state.view = 'hashtags';
+      state.currentId = null;
+      render();
+      break;
+    case 'home':
+      state.view = 'list';
+      state.currentId = null;
+      render();
+      break;
+    case 'close-modal':
+      closeModal();
+      break;
+    case 'open':
+      state.view = 'detail';
+      state.currentId = id;
+      render();
+      break;
+    case 'back':
+      state.view = 'list';
+      state.currentId = null;
+      render();
+      break;
+    case 'delete': {
+      const c = getCreator(id);
+      if (!c) break;
+      openConfirm('حذف پروفایل', `آیا مطمئنی می‌خواهی «${c.name || 'بدون نام'}» و همه اطلاعاتش حذف شود؟`, () => deleteCreator(id));
+      break;
+    }
+    case 'clear-filters':
+      state.search = '';
+      state.sort = 'newest';
+      render();
+      break;
+    case 'toggle-tag': {
+      const c = getCreator(id);
+      if (!c) break;
+      const tag = el.dataset.tag;
+      c.hashtags = c.hashtags || [];
+      c.days = c.days || {};
+      if (c.hashtags.includes(tag)) {
+        c.hashtags = c.hashtags.filter(t => t !== tag);
+        delete c.days[tag];
+      } else {
+        c.hashtags.push(tag);
+      }
+      c.updatedAt = Date.now();
+      persist(c);
+      const panel = document.getElementById('ht-panel');
+      if (panel) panel.outerHTML = hashtagPanelHTML(c);
+      break;
+    }
+    case 'copy-tags': {
+      const c = getCreator(id);
+      if (!c) break;
+      const text = (c.hashtags || []).map(t => '#' + t).join(' ');
+      navigator.clipboard?.writeText(text).then(() => toast('هشتگ‌ها کپی شدند')).catch(() => toast('کپی نشد', 'err'));
+      break;
+    }
+    case 'rate': {
+      const c = getCreator(id);
+      if (!c) break;
+      const v = Number(el.dataset.value);
+      c.rating = (c.rating === v) ? 0 : v;
+      c.updatedAt = Date.now();
+      persist(c);
+      document.querySelectorAll(`.rating[data-id="${id}"] button`).forEach(b => {
+        b.classList.toggle('on', Number(b.dataset.value) <= c.rating);
+      });
+      break;
+    }
+    case 'del-note':
+    case 'del-idea':
+    case 'del-link': {
+      const c = getCreator(id);
+      if (!c) break;
+      const nid = el.dataset.nid;
+      const key = action === 'del-note' ? 'notes' : action === 'del-idea' ? 'ideas' : 'links';
+      c[key] = c[key].filter(x => x.id !== nid);
+      c.updatedAt = Date.now();
+      persist(c);
+      render();
+      break;
+    }
+    case 'export': {
+      const blob = new Blob([JSON.stringify(state.creators, null, 2)], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `creators-backup-${new Date().toISOString().slice(0,10)}.json`;
+      a.click();
+      URL.revokeObjectURL(a.href);
+      toast('فایل پشتیبان دانلود شد');
+      break;
+    }
+    case 'import':
+      document.getElementById('file-input').click();
+      break;
+  }
+});
+
+/* ---------- submit handlers ---------- */
+document.addEventListener('submit', (e) => {
+  const form = e.target;
+  e.preventDefault();
+
+  if (form.id === 'new-form') {
+    const fd = new FormData(form);
+    const name = (fd.get('name') || '').trim();
+    if (!name) { toast('نام را وارد کن', 'err'); return; }
+    const c = createCreator({
+      name,
+      niche: fd.get('niche'),
+    });
+    closeModal();
+    state.view = 'detail';
+    state.currentId = c.id;
+    render();
+    toast('پروفایل ساخته شد');
+    return;
+  }
+
+  const type = form.dataset.form;
+  if (!type) return;
+  const c = getCreator(form.dataset.id);
+  if (!c) return;
+
+  if (type === 'add-note' || type === 'add-idea') {
+    const input = form.querySelector('input[name="text"]');
+    const text = input.value.trim();
+    if (!text) return;
+    const key = type === 'add-note' ? 'notes' : 'ideas';
+    c[key].unshift({ id: uid(), text, time: Date.now() });
+    input.value = '';
+    c.updatedAt = Date.now();
+    persist(c);
+    render();
+    return;
+  }
+
+  if (type === 'add-link') {
+    const fd = new FormData(form);
+    const url = (fd.get('url') || '').trim();
+    if (!url) return;
+    const title = (fd.get('title') || '').trim() || url;
+    c.links.unshift({ id: uid(), title, url });
+    c.updatedAt = Date.now();
+    persist(c);
+    render();
+    return;
+  }
+});
+
+/* ---------- live input ---------- */
+let saveTimer = null;
+document.addEventListener('input', (e) => {
+  const t = e.target;
+
+  if (t.id === 'search') {
+    state.search = t.value;
+    refreshGrid();
+    return;
+  }
+
+  const field = t.dataset.field;
+  if (!field) return;
+  const c = getCreator(t.dataset.id);
+  if (!c) return;
+
+  c[field] = t.value;
+  c.updatedAt = Date.now();
+
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(() => persist(c), 350);
+
+  if (field === 'name') {
+    const dn = document.querySelector('.detail-name');
+    if (dn) dn.textContent = t.value || 'بدون نام';
+    const av = document.querySelector('.avatar-lg');
+    if (av) {
+      av.textContent = initial(t.value);
+      av.style.background = avatarGradient(t.value);
+    }
+  }
+});
+
+/* ---------- change (selects) ---------- */
+document.addEventListener('change', (e) => {
+  const t = e.target;
+
+  if (t.id === 'sort') {
+    state.sort = t.value;
+    refreshGrid();
+    return;
+  }
+
+  if (t.dataset.action === 'set-day') {
+    const c = getCreator(t.dataset.id);
+    if (!c) return;
+    c.days = c.days || {};
+    c.days[t.dataset.tag] = t.value;
+    c.updatedAt = Date.now();
+    persist(c);
+    return;
+  }
+
+  const field = t.dataset.field;
+  if (!field) return;
+  const c = getCreator(t.dataset.id);
+  if (!c) return;
+  c[field] = t.value;
+  c.updatedAt = Date.now();
+  persist(c);
+  if (field === 'status') render();
+});
+
+/* ---------- import file ---------- */
+document.getElementById('file-input').addEventListener('change', (e) => {
+  const file = e.target.files?.[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    try {
+      const data = JSON.parse(reader.result);
+      if (!Array.isArray(data)) throw new Error('bad');
+      const existing = new Set(state.creators.map(c => c.id));
+      let added = 0;
+      data.forEach(c => {
+        if (c && c.id && !existing.has(c.id)) {
+          state.creators.push(c);
+          added++;
+        }
+      });
+      persist();
+      render();
+      toast(`${added} پروفایل بازیابی شد`);
+    } catch (err) {
+      toast('فایل معتبر نیست', 'err');
+    }
+  };
+  reader.readAsText(file);
+  e.target.value = '';
+});
+
+/* ---------- escape key ---------- */
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeModal();
+});
+
+/* =========================================================
+   INIT
+   ========================================================= */
+(async () => {
+  const main = document.getElementById('main');
+  if (main) main.innerHTML = '<div class="empty"><div class="empty-ico">⏳</div><h3>در حال بارگذاری…</h3><p>اتصال به سوپابیس</p></div>';
+  await loadStore();
+  render();
+})();
+</script>
+</body>
+</html>
